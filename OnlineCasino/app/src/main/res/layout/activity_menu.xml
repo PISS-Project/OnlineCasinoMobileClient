@@ -33,6 +33,7 @@
         android:background="@drawable/menu_item"
         android:elevation="0dp"
         android:text="Play"
+        android:onClick="play"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold|italic"

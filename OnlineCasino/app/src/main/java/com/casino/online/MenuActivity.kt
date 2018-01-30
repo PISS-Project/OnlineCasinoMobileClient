@@ -23,4 +23,9 @@ class MenuActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
+
+    fun play(view: View) {
+        val intent = Intent(this, DicesActivity::class.java)
+        startActivity(intent)
+    }
 }

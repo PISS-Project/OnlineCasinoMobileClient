@@ -28,14 +28,78 @@ tools:context=".DicesActivity">
 
 </LinearLayout>
 
-<Button
-    android:id="@+id/rollDices"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Roll Dices"
-    android:textSize="20sp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="30dp"
-    android:layout_centerHorizontal="true"/>
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/spinnerBet"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="201dp"
+        android:layout_marginEnd="63dp"
+        android:hint="2"
+        android:textColorHint="#05ab9a"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/rollDices"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="133dp"
+        android:background="@drawable/menu_item"
+        android:text="Roll Dices"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="202dp"
+        android:text="Bet "
+        android:textSize="27sp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView"
+        android:layout_marginStart="134dp"
+        android:ems="10"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="208dp"
+        android:text="on a sum of "
+        android:textSize="27sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="307dp"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/spinnerBet"
+        android:layout_alignTop="@+id/textView"
+        android:text="credits"
+        android:textSize="25sp" />
 
 </RelativeLayout>

@@ -25,7 +25,11 @@ class MenuActivity : AppCompatActivity() {
     }
 
     fun play(view: View) {
+        val token = intent.getStringExtra("token")
+        val userId = intent.getStringExtra("userId")
         val intent = Intent(this, DicesActivity::class.java)
+        intent.putExtra("token", token)
+        intent.putExtra("userId", userId)
         startActivity(intent)
     }
 }

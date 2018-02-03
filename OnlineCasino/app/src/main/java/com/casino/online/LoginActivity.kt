@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.View
 import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.result.failure
 import com.github.kittinunf.result.success
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {

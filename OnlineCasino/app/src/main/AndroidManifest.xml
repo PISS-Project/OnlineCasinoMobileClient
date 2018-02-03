@@ -20,9 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".DicesActivity"></activity>
+        <activity android:name=".RegisterActivity" android:label="Online Casino"/>
+        <activity android:name=".MenuActivity" android:label="Online Casino"/>
+        <activity android:name=".DicesActivity" android:label="Online Casino"/>
+        <activity android:name=".ProfileActivity" android:label="Online Casino"/>
+        <activity android:name=".DepositActivity" android:label="Online Casino"/>
     </application>
 
 </manifest>

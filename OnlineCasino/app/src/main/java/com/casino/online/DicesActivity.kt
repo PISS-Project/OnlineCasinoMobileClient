@@ -46,8 +46,8 @@ class DicesActivity : AppCompatActivity() {
         applySpinnerAdapter()
     }
 
-    fun setResultString(actualRoll: Int, win: Int) {
-        textView3.text = String.format("Sum of dices: %2d. You won %2d credits!", actualRoll, win)
+    fun setResultString(actualRoll: Int, win: Double) {
+        textView3.text = String.format("Sum of dices: %2d. You won %.0f credits!", actualRoll, win)
     }
 
     fun applySpinnerAdapter() {
@@ -60,8 +60,8 @@ class DicesActivity : AppCompatActivity() {
 
         val RANDOM = Random()
 
-        fun randomDiceValue(): Int {
-            return RANDOM.nextInt(6) + 1
+        fun randomDiceValue(actualRoll: Int): Int {
+            return RANDOM.nextInt(actualRoll - 2) + 1
         }
     }
 
@@ -77,14 +77,12 @@ class DicesActivity : AppCompatActivity() {
 
         val body = String.format("{ \"bet\" : %2d, \"stake\" : %2d }", bet, stake)
         val url = String.format(BET_URL, userId)
-        val pair = Pair(-1, -1)
-
 
         Fuel.post(url).header(header1).body(body).response { request, response, result ->
 
             result.success {
                 val jsonResponse = JSONObject(String(result.get()))
-                val win = jsonResponse.getInt("win")
+                val win = jsonResponse.getDouble("win")
                 val actualRoll = jsonResponse.getInt("actualRoll")
                 val anim2 = AnimationUtils.loadAnimation(this@DicesActivity, R.anim.shake)
                 val anim1 = AnimationUtils.loadAnimation(this@DicesActivity, R.anim.shake)
@@ -93,11 +91,11 @@ class DicesActivity : AppCompatActivity() {
                 var secondDice = 0
 
                 if (actualRoll <= 7) {
-                    firstDice = randomDiceValue()
+                    firstDice = randomDiceValue(actualRoll)
                     secondDice = actualRoll - firstDice
                 } else {
-                    val startBound = Math.abs(7 - actualRoll)
-                    firstDice = startBound + Random().nextInt(7 - startBound)
+                    val startBound = Math.abs(6 - actualRoll)
+                    firstDice = startBound + Random().nextInt(6 - startBound)
                     secondDice = actualRoll - firstDice
                 }
 

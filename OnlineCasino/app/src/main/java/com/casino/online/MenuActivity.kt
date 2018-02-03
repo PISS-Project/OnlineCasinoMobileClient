@@ -14,7 +14,7 @@ class MenuActivity : AppCompatActivity() {
         showWelcomeMessage()
     }
 
-    fun showWelcomeMessage() {
+    private fun showWelcomeMessage() {
         val username = intent.getStringExtra("username")
         twWelcome.text = String.format("Welcome, %s!", username)
     }
@@ -28,6 +28,15 @@ class MenuActivity : AppCompatActivity() {
         val token = intent.getStringExtra("token")
         val userId = intent.getStringExtra("userId")
         val intent = Intent(this, DicesActivity::class.java)
+        intent.putExtra("token", token)
+        intent.putExtra("userId", userId)
+        startActivity(intent)
+    }
+
+    fun viewProfile(view: View) {
+        val token = intent.getStringExtra("token")
+        val userId = intent.getStringExtra("userId")
+        val intent = Intent(this, ProfileActivity::class.java)
         intent.putExtra("token", token)
         intent.putExtra("userId", userId)
         startActivity(intent)

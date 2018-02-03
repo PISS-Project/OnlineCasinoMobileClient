@@ -17,6 +17,7 @@ import com.github.kittinunf.result.success
 import kotlinx.android.synthetic.main.activity_roulette.*
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.HashMap
 
 class RouletteActivity : AppCompatActivity() {
 
@@ -26,11 +27,66 @@ class RouletteActivity : AppCompatActivity() {
 
     private var imageRoulette: ImageView? = null
 
+    private var digits: HashMap<Int, Int>? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_roulette)
         imageRoulette = findViewById<View>(R.id.image_roulette) as ImageView
+        initializeDigits()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public override fun onSupportNavigateUp() : Boolean{
+        finish();
+        return true;
+    }
+
+    private fun initializeDigits() {
+        digits = hashMapOf<Int, Int>(
+                0 to 0,
+                2 to 1,
+                14 to 2,
+                35 to 3,
+                23 to 4,
+                4 to 5,
+                16 to 6,
+                33 to 7,
+                21 to 8,
+                6 to 9,
+                18 to 10,
+                31 to 11,
+                19 to 12,
+                8 to 13,
+                12 to 14,
+                29 to 15,
+                25 to 16,
+                10 to 17,
+                27 to 18,
+                1 to 20,
+                13 to 21,
+                36 to 22,
+                24 to 23,
+                3 to 24,
+                15 to 25,
+                34 to 26,
+                22 to 27,
+                5 to 28,
+                17 to 29,
+                32 to 30,
+                20 to 31,
+                7 to 32,
+                11 to 33,
+                30 to 34,
+                26 to 35,
+                9 to 36,
+                28 to 37
+        )
+
+    }
+
 
     fun makeRouletteBet(view: View) {
         val token = intent.getStringExtra("token")
@@ -50,18 +106,21 @@ class RouletteActivity : AppCompatActivity() {
         Fuel.post(url).header(header).body(body).response { request, response, result ->
 
             result.success {
-                val corner = 360 / 38 // corner for point
-                val randPosition = corner * Random().nextInt(38) // random point
+                val jsonObject = JSONObject(String(result.get()))
+
+                val corner = 360 / 38.00 // corner for point
+                val spinResult = jsonObject.getInt("spinResult")
+
+                val intPosition = digits!!.get(spinResult)!!.toInt()
+                val position =  intPosition * corner
                 val MIN = 5 // min rotation
                 val MAX = 9 // max rotation
                 val TIME_IN_WHEEL: Long = 1000  // time in one rotation
                 val randRotation = MIN + Random().nextInt(MAX - MIN) // random rotation
-                val truePosition = randRotation * 360 + randPosition
-                val totalTime = TIME_IN_WHEEL * randRotation + TIME_IN_WHEEL / 360 * randPosition
+                val truePosition = randRotation * 360 + position
+                val totalTime = TIME_IN_WHEEL * randRotation + TIME_IN_WHEEL / 360 * position.toInt()
 
-                val randomInt = Random().nextInt(36)
-
-                val animator = ObjectAnimator.ofFloat(view, "rotation", 0f, randomInt.toFloat())
+                val animator = ObjectAnimator.ofFloat(view, "rotation", 0f, truePosition.toFloat())
                 animator.setDuration(totalTime)
                 animator.setInterpolator(DecelerateInterpolator())
                 animator.addListener(object : Animator.AnimatorListener {
@@ -71,8 +130,15 @@ class RouletteActivity : AppCompatActivity() {
 
                     override fun onAnimationEnd(animator: Animator) {
                         imageRoulette!!.setEnabled(true)
-                        val jsonObject = JSONObject(String(result.get()))
-                        twRouletteWin.text = "You win " + jsonObject.getDouble("win").toString()
+
+                        val returnedStake = jsonObject.getDouble("stake")
+                        val winDigitString = jsonObject.getDouble("win")
+                        if (winDigitString.compareTo(0.0) == 0) {
+                            twRouletteWin.text = String.format("Result is %2d. You lost %.0f credits!", spinResult, returnedStake)
+                        } else {
+                            twRouletteWin.text = String.format("Result is %2d. You win %.0f credits!", spinResult, winDigitString)
+                        }
+
                     }
 
                     override fun onAnimationCancel(animator: Animator) {

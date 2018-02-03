@@ -11,6 +11,13 @@ class GamesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_games)
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public override fun onSupportNavigateUp() : Boolean{
+        finish();
+        return true;
     }
 
 

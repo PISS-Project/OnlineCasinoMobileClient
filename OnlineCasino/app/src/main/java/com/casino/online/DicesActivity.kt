@@ -44,6 +44,13 @@ class DicesActivity : AppCompatActivity() {
         }
 
         applySpinnerAdapter()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public override fun onSupportNavigateUp() : Boolean{
+        finish();
+        return true;
     }
 
     fun setResultString(actualRoll: Int, win: Double) {

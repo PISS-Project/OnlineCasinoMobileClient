@@ -17,6 +17,13 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public override fun onSupportNavigateUp() : Boolean{
+        finish();
+        return true;
     }
 
 

@@ -26,6 +26,13 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         showProfileInfo()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public override fun onSupportNavigateUp() : Boolean{
+        finish();
+        return true;
     }
 
     private fun showProfileInfo() {

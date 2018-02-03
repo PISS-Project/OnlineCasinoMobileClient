@@ -26,13 +26,13 @@
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.276" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView28"
         android:layout_width="169dp"
         android:layout_height="135dp"
         android:layout_marginEnd="8dp"
